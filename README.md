@@ -20,111 +20,111 @@ This project mainly include three parts.
 
 源码使用Pytorch实现，以[ultralytics/yolov3](https://github.com/ultralytics/yolov3)为YOLOv3源码仓库。基于BN层的剪植方法由[coldlarry/YOLOv3-complete-pruning](https://github.com/coldlarry/YOLOv3-complete-pruning)提供，感谢学长在模型压缩领域的探索。
 
-# 最近更新
- 2020年1月4日 提供Visdrone数据集剪裁后的下载链接和训练方法。
- 
- 2020年1月19日 提供Dior，Bdd100k，visdrone训练完成，并完成转化的.weights文件。
- 
- 2020年3月1日 实现基于mobilenetv3 backbone的YOLOv3。
- 
- 2020年4月7日 实现基于mobilenetv3的两种backbone模型，YOLOv3-mobilenet和YOLOv3tiny-mobilene-small
- ，提供预训练模型，将正常剪植算法扩展到基于mobilenet的两个模型和YOLOv3tiny模型，删除tiny剪植。
 
- 2020年4月27日 更新mobilenetv3的模型预训练，添加了层剪植方法，方法来自于[tanluren/yolov3-channel-and-layer-pruning/yolov3](https://github.com/tanluren/yolov3-channel-and-layer-pruning)，
- 感谢大佬的分享。
- 
- 2020年5月22日 更新了[ultralytics/yolov3](https://github.com/ultralytics/yolov3)为YOLOv3源码仓库的最新优化，更新YOLOv4网络结构和权重文件。
+On January 4, 2020, we will provide the download link and training method of the Visdrone dataset after trimming.
 
- 2020年5月22日 更新了8位定点量化方法，修复一些bug。
- 
- 2020年7月12日 修复了YOLOv3-mobilenet剪植后map归0的问题，详见issue#41。
+On January 19, 2020, Dior, Bdd100k, and visdrone training will be completed and the converted .weights file will be completed.
 
- 2020年7月14日 更新mobilenet支持基于shortcut的两种极限剪植方法和depthwise卷积的bn融合方法。
-# 环境部署
-1.由于采用[ultralytics/yolov3](https://github.com/ultralytics/yolov3)的YOLO实现，环境搭建详见[ultralytics/yolov3](https://github.com/ultralytics/yolov3)。这里简要说明：
+On March 1, 2020, YOLOv3 based on mobilenetv3 backbone will be realized.
+
+On April 7, 2020, implement two backbone models based on mobilenetv3, YOLOv3-mobilenet and YOLOv3tiny-mobilene-small, provide pre-training models, extend the normal clipping algorithm to the two models based on mobilenet and the YOLOv3tiny model, delete the tiny clip plant.
+
+The model pre-training of mobilenetv3 was updated on April 27, 2020, and the layer pruning method was added. The method comes from [tanluren/yolov3-channel-and-layer-pruning/yolov3](https://github.com/tanluren/yolov3-channel-and-layer-pruning)， . Thanks for sharing.
+
+On May 22, 2020,[ultralytics/yolov3](https://github.com/ultralytics/yolov3) was updated as the latest optimization of the YOLOv3 source code repository, and the YOLOv4 network structure and weight files were updated.
+
+On May 22, 2020, the 8-bit fixed-point quantization method was updated and some bugs were fixed.
+
+On July 12, 2020, the problem of YOLOv3-mobilenet's map returning to 0 after cutting and planting was fixed, see issue#41 for details.
+
+On July 14, 2020, mobilenet was updated to support two extreme clipping methods based on shortcut and the bn fusion method of depthwise convolution.
+
+
+# Environment deployment
+1. Due to the YOLO implementation of [ultralytics/yolov3](https://github.com/ultralytics/yolov3) , see [ultralytics/yolov3](https://github.com/ultralytics/yolov3) for details of environment setup . Here is a brief description:
+
 
 - `numpy`
 - `torch >= 1.1.0`
 - `opencv-python`
 - `tqdm`
 
-可直接`pip3 install -U -r requirements.txt`搭建环境，或根据该.txt文件使用conda搭建。
+You can `pip3 install -U -r requirements.txt`build the environment directly , or use conda to build it based on the .txt file.
 
-# 目前支持功能
+# Currently supported features
 
-|<center>功能</center>|<center></center>|
+|<center>Features</center>|<center></center>|
 | --- |--- |
-|<center>训练</center>|
-|<center>正常训练</center>|<center>√</center>|
-|<center>tiny训练</center>|<center>√</center>|
-|<center>mobilenetv3训练</center>|<center>√</center>|
-|<center>mobilenetv3-small训练</center>|<center>√</center>|
-|<center>多数据集</center>|
-|<center>Dior数据集训练</center>|<center>√</center>|
-|<center>bdd100k数据集训练</center>|<center>√</center>|
-|<center>visdrone数据集训练</center>|<center>√</center>|
-|<center>剪植</center>|
-|<center>稀疏化训练</center>|<center>√</center>  |
-|<center>正常剪枝</center>|<center>√</center>|
-|<center>规整剪枝</center>|<center>√</center>  |
-|<center>极限剪枝(shortcut)</center>|<center>√</center> |
-|<center>层剪植</center>|<center>√</center> |
-|<center>量化</center>|
-|<center>BNN量化</center>|<center>√</center>  |
-|<center>BWN量化</center>|<center>√</center>  |
-|<center>stage-wise 逐层量化</center>|<center>√</center>  |
-|<center>知识蒸馏</center>|<center>√</center>  |
+|<center>training</center>|
+|<center>Normal training</center>|<center>√</center>|
+|<center>tiny training</center>|<center>√</center>|
+|<center>mobilenetv3 training</center>|<center>√</center>|
+|<center>mobilenetv3-small training</center>|<center>√</center>|
+|<center>Multiple data sets</center>|
+|<center>Dior data set training</center>|<center>√</center>|
+|<center>bdd100k data set training</center>|<center>√</center>|
+|<center>visdrone dataset training</center>|<center>√</center>|
+|<center>Cut plant</center>|
+|<center>Sparse training</center>|<center>√</center>  |
+|<center>Normal pruning</center>|<center>√</center>|
+|<center>pruning</center>|<center>√</center>  |
+|<center>Limit pruning(shortcut)</center>|<center>√</center> |
+|<center>Layer cutting</center>|<center>√</center> |
+|<center>quantify</center>|
+|<center>BNN quantification</center>|<center>√</center>  |
+|<center>BWN quantification</center>|<center>√</center>  |
+|<center>stage-wise quantisation</center>|<center>√</center>  |
+|<center>knowledge distillation</center>|<center>√</center>  |
 
-# 可用指令
+#  Available commands
 
-`python3 train.py --data ... --cfg ... `为训练模型指令，使用coco预训练模型时需要-pt指令。
+`python3 train.py --data ... --cfg ... `To train the model instruction, the -pt instruction is required when using the coco pre-training model.
 
-`python3 test.py --data ... --cfg ... ` 为mAP测试指令。
+`python3 test.py --data ... --cfg ... ` Test instructions for mAP
 
-`python3 detect.py --data ... --cfg ... --source ...`为推理检测指令，source默认地址为data/samples,输出结果保存在output文件中，检测资源可以为图片，视频等。
+`python3 detect.py --data ... --cfg ... --source ...`To reason about the detection instructions, the default address of the source is data/samples, the output results are saved in the output file, and the detection resources can be pictures, videos, etc.
 
-# 一、多数据集训练
-本项目提供针对YOLOv3仓库的预处理数据集，配置文件(.cfg)，数据集索引文件(.data)，数据集类别文件(.names)以及使用k-means算法重新聚类的anchor box尺寸(包含用于yolov3的9框和tiny-yolov3的6框)。
+# Multi-dataset training
+This project provides preprocessed data sets for YOLOv3 warehouse, configuration files (.cfg), data set index files (.data), data set category files (.names) and anchor box size ( Contains 9 boxes for yolov3 and 6 boxes for tiny-yolov3).
 
-mAP统计
+mAP statistics
 
-|<center>数据集</center>|<center>YOLOv3-640</center>|<center>YOLOv4-640</center>|<center>YOLOv3-mobilenet-640</center>|
+|<center>data set</center>|<center>YOLOv3-640</center>|<center>YOLOv4-640</center>|<center>YOLOv3-mobilenet-640</center>|
 | --- |--- |--- |--- |
-|<center>Dior遥感数据集</center>|<center>0.749</center>|
-|<center>bdd100k自动驾驶数据集</center>|<center>0.543</center>|
-|<center>visdrone无人机航拍数据集</center>|<center>0.311</center>|<center>0.383</center>|<center>0.348</center>|
+|<center>Dior remote sensing dataset</center>|<center>0.749</center>|
+|<center>bdd100k autonomous driving dataset</center>|<center>0.543</center>|
+|<center>visdrone drone aerial photography dataset</center>|<center>0.311</center>|<center>0.383</center>|<center>0.348</center>|
 
-
-下载地址如下，下载并解压后将文件夹拷贝至data目录下即可使用。
+The download address is as follows, after downloading and decompressing, copy the folder to the data directory to use.
 
 - [COCO2017](https://pan.baidu.com/s/1KysFL6AmdbCBq4tHDebqlw)
   
-  提取码：hjln
+  Extraction code：hjln
 
 - [COCO2014](https://pan.baidu.com/s/1EoXOR77yEVokqPCaxg8QGg)
   
-  提取码：rhqx
+  Extraction code：rhqx
 
 - [COCO权重文件](https://pan.baidu.com/s/1JZylwRQIgAd389oWUu0djg)
 
-  提取码：k8ms
+  Extraction code：k8ms
   
-训练指令
+Training instruction
 
 ```bash
 python3 train.py --data data/coco2017.data --batch-size ... --weights weights/yolov3-608.weights -pt --cfg cfg/yolov3/yolov3.cfg --img-size ... --epochs ...
 ```
 
 
-- [Dior遥感数据集](https://pan.baidu.com/s/1z0IQPBN16I-EctjwN9Idyg)
+- [Dior remote sensing dataset](https://pan.baidu.com/s/1z0IQPBN16I-EctjwN9Idyg)
   
-  提取码：vnuq
+  Extraction code：vnuq
 
-- [Dior权重文件](https://pan.baidu.com/s/12lYOgBAo1R5VkOZqDqCFJQ)
+- [Dior weight file](https://pan.baidu.com/s/12lYOgBAo1R5VkOZqDqCFJQ)
 
-  提取码：l8wz
+  Extraction code：l8wz
   
-训练指令
+training instruction
 
 ```bash
 python3 train.py --data data/dior.data --batch-size ... --weights weights/yolov3-608.weights -pt --cfg cfg/yolov3/yolov3-onDIOR.cfg --img-size ... --epochs ...
@@ -133,13 +133,13 @@ python3 train.py --data data/dior.data --batch-size ... --weights weights/yolov3
 
 - [bdd100k无人驾驶数据集](https://pan.baidu.com/s/157Md2qeFgmcOv5UmnIGI_g)
   
-  提取码：8duw
+  Extraction code：8duw
   
 - [bdd100k权重文件](https://pan.baidu.com/s/1wWiHlLxIaK_WHy_mG2wmAA)
 
-  提取码：xeqo
+  Extraction code：xeqo
   
-训练指令
+Training instruction
 
 ```bash
 python3 train.py --data data/bdd100k.data --batch-size ... --weights weights/yolov3-608.weights -pt --cfg cfg/yolov3/yolov3-bdd100k.cfg --img-size ... --epochs ...
@@ -147,21 +147,21 @@ python3 train.py --data data/bdd100k.data --batch-size ... --weights weights/yol
 
 - [visdrone数据集](https://pan.baidu.com/s/1CPGmS3tLI7my4_m7qDhB4Q)
   
-  提取码：dy4c
+  Extraction code：dy4c
   
 - [YOLOv3-visdrone权重文件](https://pan.baidu.com/s/1N4qDP3b0tt8TIWuTFefDEw)
 
-  提取码：87lf
+  Extraction code：87lf
 
 - [YOLOv4-visdrone权重文件](https://pan.baidu.com/s/1zOFyt_AFiNk0fAFa8yE9RQ)
 
-  提取码：xblu
+  Extraction code：xblu
   
  - [YOLOv3-mobilenet-visdrone权重文件](https://pan.baidu.com/s/1BHC8b6xHmTuN8h74QJFt1g)
 
-  提取码：fb6y
+  Extraction code：fb6y
 
-训练指令
+Training instruction
 
 ```bash
 python train.py --data data/visdrone.data --batch-size ... --weights weights/yolov3-608.weights -pt --cfg cfg/yolov3/yolov3-visdrone.cfg  --img-size ... --epochs ...
@@ -169,52 +169,52 @@ python train.py --data data/visdrone.data --batch-size ... --weights weights/yol
 
 - [oxfordhand数据集](https://pan.baidu.com/s/1JL4gFGh-W_gYEEsiIQssZw)
   
-  提取码：3du4
+  Extraction code：3du4
 
-训练指令
+Training instruction
 
 ```bash
 python train.py --data data/oxfordhand.data --batch-size ... --weights weights/yolov3-608.weights -pt --cfg cfg/yolov3/yolov3-visdrone.cfg  --img-size ... --epochs ...
 ```
 
-## 1、Dior数据集
-DIRO数据集是地球观测社区中最大、最多样化和公开可用的目标检测数据集之一。其中船舶和车辆的实例数较高，在小型实例和大型实例之间实现了良好的平衡。图片采集自Google Earth。
+## 1、Dior dataset
+The DIRO dataset is one of the largest, most diverse and publicly available target detection datasets in the Earth observation community. Among them, the number of instances of ships and vehicles is relatively high, achieving a good balance between small instances and large instances. The picture was collected from Google Earth.
 
-[数据集详细介绍](https://cloud.tencent.com/developer/article/1509762)
+[dataset detailed instruction](https://cloud.tencent.com/developer/article/1509762)
 
-### 检测效果
-![检测效果](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/2.jpg)
-![检测效果](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/3.jpg)
+### Detection effect
+![Detection effect ](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/2.jpg)
+![Detection effect ](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/3.jpg)
 
-## 2、bdd100k数据集
+## 2、bdd100k dataset
 bdd100是一个大规模、多样化的驾驶视频数据集，共包含十万个视频。每个视频大约40秒长，研究者为所有10万个关键帧中常出现在道路上的对象标记了边界框。数据集涵盖了不同的天气条件，包括晴天、阴天和雨天、以及白天和晚上的不同时间。
 
-[官网](http://bair.berkeley.edu/blog/2018/05/30/bdd/)
+[official website](http://bair.berkeley.edu/blog/2018/05/30/bdd/)
 
-[原数据集下载](http://bdd-data.berkeley.edu)
+[ Original dataset ](http://bdd-data.berkeley.edu)
 
-[论文](https://arxiv.org/abs/1805.04687)
+[paper](https://arxiv.org/abs/1805.04687)
 
-### 检测效果
-![检测效果](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/1.jpg)
+### Detection effect
+![Detection effect ](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/1.jpg)
 
-## 3、Visdrone数据集
-VisDrone2019数据集由中国天津大学机器学习和数据挖掘实验室的AISKYEYE团队收集。基准数据集包含288个视频片段，由261,908个帧和10,209个帧组成静态图像，由各种安装在无人机上的摄像头捕获，涵盖了广泛的方面，包括位置（从中国相距数千公里的14个不同城市中拍摄），环境（城市和乡村），物体（行人，车辆，自行车等）和密度（稀疏和拥挤的场景）。该数据集是在各种情况下以及在各种天气和光照条件下使用各种无人机平台（即具有不同模型的无人机）收集的。这些框架使用超过260 万个边界框手动标注，这些边界框是人们经常感兴趣的目标，例如行人，汽车，自行车和三轮车。还提供了一些重要属性，包括场景可见性，对象类别和遮挡，以提高数据利用率.
+## 3、Visdrone dataset
+The VisDrone2019 dataset was collected by the AISKYEYE team of the Machine Learning and Data Mining Laboratory of Tianjin University, China. The benchmark data set contains 288 video clips, composed of 261,908 frames and 10,209 frames as static images, captured by various drone-mounted cameras, covering a wide range of aspects, including location (from 14 thousands of kilometers away from China) Shooting in different cities), environment (urban and rural), objects (pedestrians, vehicles, bicycles, etc.) and density (sparse and crowded scenes). This data set was collected using various drone platforms (i.e. drones with different models) in various situations and under various weather and lighting conditions. These frames are manually labeled with more than 2.6 million bounding boxes, which are objects that people are often interested in, such as pedestrians, cars, bicycles, and tricycles. Some important attributes are also provided, including scene visibility, object category and occlusion to improve data utilization.
 
-[官网](http://www.aiskyeye.com/)
+[Official website](http://www.aiskyeye.com/)
 
-### 检测效果YOLOv3
-![检测效果](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/4.jpg)
+### Detection effect YOLOv3
+![Detection effect ](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/4.jpg)
 
-### 检测效果YOLOv4
-![检测效果](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/5.jpg)
-![检测效果](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/6.png)
+### Detection effect YOLOv4
+![Detection effect ](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/5.jpg)
+![Detection effect ](https://github.com/SpursLipu/YOLOv3-ModelCompression-MultidatasetTraining/blob/master/image_in_readme/6.png)
 
 
-# 二、多种网络结构
-在mobilenetv3基础上设计了两种网络结构
+# Multiple network structures
+Two network structures are designed on the basis of mobilenetv3
 
-|结构名称 |<center>backbone</center>|<center>后处理</center> |<center>总参数</center> |<center>GFLOPS</center> |<center>mAP0.5</center> |<center>mAP0.5:0.95</center> |<center>speed(inference/NMS/total)</center> |<center>FPS</center> |
+|Structure Name |<center>backbone</center>|<center>Post processing</center> |<center>Total parameters</center> |<center>GFLOPS</center> |<center>mAP0.5</center> |<center>mAP0.5:0.95</center> |<center>speed(inference/NMS/total)</center> |<center>FPS</center> |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |YOLOv3                      |38.74M  |20.39M  |59.13M  |117.3   |0.580  |0.340  |12.3/1.7/14.0 ms|71.4fps  |
 |YOLOv3tiny                  |6.00M   |2.45M   |8.45M   |9.9     |0.347  |0.168  |3.5/1.8/5.3 ms  |188.7fps |
@@ -223,64 +223,64 @@ VisDrone2019数据集由中国天津大学机器学习和数据挖掘实验室�
 |YOLOv4                      |-       |-       |61.35M  |107.1   |0.650  |0.438  |13.5/1.8/15.3 ms|65.4fps  |
 |YOLOv4-tiny                 |-       |-       |5.78M   |12.3    |0.435  |0.225  |4.1/1.7/5.8 ms  |172.4fps |
 
-注：
+Training instruction：
 
-1、YOLOv3,YOLOv3tiny和YOLOv4是在coco2014上训练和测试的，YOLOv3-mobilenetv3和YOLOv3tiny-mobilenetv3-small是在coco2017上训练和测试的。
-    
-2、推理速度在GTX2080ti*4上测试,输入图片尺寸608。
-    
-3、训练测试集与训练集应当相匹配，不匹配会造成map虚高的问题。原因参照[issue](https://github.com/ultralytics/yolov3/issues/970)
+1. YOLOv3, YOLOv3tiny and YOLOv4 are trained and tested on coco2014, YOLOv3-mobilenetv3 and YOLOv3tiny-mobilenetv3-small are trained and tested on coco2017.
 
-## 训练指令
+2. The reasoning speed is tested on GTX2080ti*4, and the input image size is 608.
+    
+3. The training test set and the training set should match. Mismatch will cause the problem of false height of the map. Refer to [issue](https://github.com/ultralytics/yolov3/issues/970) for the reason
+
+## Training instruction
 1、YOLOv3
 ```bash
 python3 train.py --data data/... --batch-size ... -pt --weights weights/yolov3-608.weights --cfg cfg/yolov3/yolov3.cfg --img_size ...
 ```
 
-权重文件下载
-- [COCO预训练权重文件](https://pan.baidu.com/s/1JZylwRQIgAd389oWUu0djg)
+Weight file downloaded
+- [COCO pretraining weights file](https://pan.baidu.com/s/1JZylwRQIgAd389oWUu0djg)
 
-  提取码：k8ms
+  Extraction code：k8ms
 
 2、YOLOv3tiny
 ```bash
 python3 train.py --data data/... --batch-size ... -pt --weights weights/yolov3tiny.weights --cfg cfg/yolov3tiny/yolov3-tiny.cfg --img_size ...
 ```
 
-- [COCO预训练权重文件](https://pan.baidu.com/s/1iWGxdjR3TWxEe37__msyRA)
+- [COCO pretraining weights file](https://pan.baidu.com/s/1iWGxdjR3TWxEe37__msyRA)
 
-  提取码：udfe
+  Extraction code：udfe
   
 3、YOLOv3tiny-mobilenet-small
 ```bash
 python3 train.py --data data/... --batch-size ... -pt --weights weights/yolov3tiny-mobilenet-small.weights --cfg cfg/yolov3tiny-mobilenet-small/yolov3tiny-mobilenet-small-coco.cfg --img_size ...
 ```
 
-- [COCO预训练权重文件](https://pan.baidu.com/s/1mSFjWLU91H2OhNemsAeiiQ)
+- [COCO pretraining weights file](https://pan.baidu.com/s/1mSFjWLU91H2OhNemsAeiiQ)
 
-  提取码：pxz4
+  Extraction code：pxz4
 
 4、YOLOv3-mobilenet
 ```bash
 python3 train.py --data data/... --batch-size ... -pt --weights weights/yolov3-mobilenet.weights --cfg cfg/yolov3-mobilenet/yolov3-mobilenet-coco.cfg --img_size ...
 ```
 
-- [COCO预训练权重文件](https://pan.baidu.com/s/1EI2Xh1i18CRLoZo_P3NVHw)
+- [COCO pretraining weights file](https://pan.baidu.com/s/1EI2Xh1i18CRLoZo_P3NVHw)
 
-  提取码：3vm8
+  Extraction code：3vm8
 
 5、YOLOv4
 ```bash
 python3 train.py --data data/... --batch-size ... -pt --weights weights/yolov4.weights --cfg cfg/yolov4/yolov4.cfg --img_size ...
 ```
 
-- [COCO预训练权重文件](https://pan.baidu.com/s/1jAGNNC19oQhAIgBfUrkzmQ)
+- [COCO pretraining weights file](https://pan.baidu.com/s/1jAGNNC19oQhAIgBfUrkzmQ)
 
-  提取码：njdg
+  Extraction code：njdg
   
-# 三、模型压缩
+# Three, model compression
 
-## 1、剪植
+## 1 Cut and plant
 
 ### 剪植特点
 |<center>剪枝方案</center> |<center>优点</center>|<center>缺点</center> |
